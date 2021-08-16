@@ -7,7 +7,6 @@ router.get('/posts', async (req, res) => {
     const posts = await Post.find().exec()
     res.send(posts)
 })
-
 router.post('/posts', async (req, res) => {
     const post = new Post({
         title: req.body.title,
@@ -16,7 +15,6 @@ router.post('/posts', async (req, res) => {
     await post.save()
     res.send(post)
 })
-
 router.get('/posts/:id', async (req, res) => {
     try {
         const post = await Post.findById( req.params.id )
@@ -26,14 +24,11 @@ router.get('/posts/:id', async (req, res) => {
         res.send({ error: "Post doesn't exist!" })
     }
 })
-
 router.put("/posts/:id", async (req, res) => {
     try {
         const post = await Post.findOne({ _id: req.params.id })
-        const {title, content} = req.body
 
-        if (title) post.title = title
-        if (content) post.content = content
+        post.set(req.body);
 
         await post.save()
         res.send(post)
@@ -42,7 +37,6 @@ router.put("/posts/:id", async (req, res) => {
         res.send({ error: "Post doesn't exist!" })
     }
 })
-
 router.delete('/posts/:id', async (req, res) => {
     try {
         await Post.deleteOne({ _id: req.params.id })
