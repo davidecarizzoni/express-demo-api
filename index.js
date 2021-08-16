@@ -1,32 +1,19 @@
 const express = require('express')
-const app = express()
-const PORT = 8080
+const routes = require('./routes')
+const mongoAtlasUri ='mongodb+srv://admin:YJXghvdgNqG4vgZm@cluster0.rha3y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
-app.use(express.json() )
+const mongoose = require('mongoose')
 
-app.listen(
-    PORT,
-    () => console.log(`It's alive on http://localhost: ${PORT}`)
-)
+// Connect to MongoDB database
+mongoose
+    .connect(mongoAtlasUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        const app = express()
+        app.use(express.json())
+        app.use("/api", routes)
 
-app.get('/tshirt', (req, res) => {
-    res.status(200).send({
-        tshirt: 'lllll',
-        size: 'xl'
-    })
-})
-
-app.post('/tshirt/:id', (req, res) => {
-
-    const {id} = req.params
-    const {logo} = req.body
-
-    if(!logo) {
-        res.status(418).send({message: 'We need a logo'})
-    }
-
-    res.send({
-        tshirt: `Tshirt with your ${logo} and ID of ${id}`
+        app.listen(8080, () => {
+            console.log("Server has started!")
+        })
     })
 
-})
