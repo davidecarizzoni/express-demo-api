@@ -2,13 +2,14 @@ const express = require('express')
 const Reservations = require('./src/models/Reservation')
 const router = express.Router()
 
-
 //RESERVATIONS
 router.post('/reservations', async (req, res) => {
     const reservation = new Reservations({
         title: req.body.title,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
+        line: req.body.line,
+        hourlyCost : req.body.hourlyCost,
     })
     await reservation.save()
     res.setHeader('Access-Control-Allow-Origin', '*');
