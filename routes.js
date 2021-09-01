@@ -104,6 +104,19 @@ router.delete('/products/:id', async (req, res) => {
     }
 })
 
+//RESERVATIONS
+router.post('/reservations', async (req, res) => {
+    const post = new Post({
+        title: req.body.title,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+    })
+    await post.save()
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(post)
+})
+
+
 
 
 module.exports = router
