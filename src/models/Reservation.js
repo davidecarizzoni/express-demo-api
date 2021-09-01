@@ -10,6 +10,16 @@ const schema = new Schema({
         type: Date,
         required: true
     },
+    line: {
+        type: String,
+        enum : ['1','2-5','6+'],
+        default: '1'
+    },
+    hourlyCost: {
+        type: Number,
+        enum : [20,15,12],
+        default: 20
+    },
     endDate: {
         type: Date,
         required: true

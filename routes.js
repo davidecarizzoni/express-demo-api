@@ -1,6 +1,7 @@
 const express = require('express')
 const Post = require('./src/models/Post')
 const Product = require('./src/models/Products')
+const Reservations = require('./src/models/Reservation')
 const router = express.Router()
 
 //POSTS
@@ -106,14 +107,14 @@ router.delete('/products/:id', async (req, res) => {
 
 //RESERVATIONS
 router.post('/reservations', async (req, res) => {
-    const post = new Post({
+    const reservation = new Reservations({
         title: req.body.title,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
     })
-    await post.save()
+    await reservation.save()
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.send(post)
+    res.send(reservation)
 })
 
 
