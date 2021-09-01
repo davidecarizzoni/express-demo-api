@@ -117,6 +117,23 @@ router.post('/reservations', async (req, res) => {
     res.send(reservation)
 })
 
+router.get('/reservations', async (req, res) => {
+    const reservations = await Reservations.find().exec()
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(reservations)
+})
+
+router.get('/reservations/:id', async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    try {
+        const reservation = await Reservations.findById( req.params.id )
+        res.send(reservation)
+    } catch {
+        res.status(404)
+        res.send({ error: "Reservation doesn't exist!" })
+    }
+})
+
 
 
 
