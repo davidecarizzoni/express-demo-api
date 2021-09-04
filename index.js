@@ -3,6 +3,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const app = express()
+const port = process.env.PORT || 8080;
 const cors = require('cors')
 
 app.use(bodyParser.json())
@@ -21,7 +22,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 app.use(express.json())
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
     console.log("Server has started!")
 })
 
