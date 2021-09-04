@@ -11,21 +11,21 @@ router.post('/', async (req, res) => {
         line: req.body.line,
         hourlyCost : req.body.hourlyCost,
     })
-    await reservation.save()
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Header', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.send(reservation)
+    try{
+        await reservation.save()
+        res.json(reservation)
+    } catch (e){
+        res.json({message:e})
+    }
+
 })
 
 router.get('/', async (req, res) => {
     const reservations = await Reservations.find().exec()
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(reservations)
 })
 
 router.get('/:id', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const reservation = await Reservations.findById( req.params.id )
         res.send(reservation)
@@ -36,10 +36,8 @@ router.get('/:id', async (req, res) => {
 })
 
 router.put("/:id", async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const reservation = await Reservations.findOne({ _id: req.params.id })
-
         reservation.set(req.body);
 
         await reservation.save()
@@ -50,7 +48,6 @@ router.put("/:id", async (req, res) => {
     }
 })
 router.delete('/:id', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         await Reservations.deleteOne({ _id: req.params.id })
         res.status(204).send()
@@ -59,8 +56,6 @@ router.delete('/:id', async (req, res) => {
         res.send({ error: `Reservations doesn't exist!` })
     }
 })
-
-
 
 
 module.exports = router
