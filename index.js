@@ -14,8 +14,8 @@ const reservationRoutes = require('./src/routes/reservations')
 const postsRoutes = require('./src/routes/posts')
 
 //MIDDLEWARE
-app.use('/reservations', reservationRoutes)
-app.use('/posts', postsRoutes)
+app.use('api/reservations', reservationRoutes)
+app.use('api/posts', postsRoutes)
 
 // Connect to MongoDB database
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connect') )
