@@ -9,7 +9,8 @@ router.post('/', async (req, res) => {
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         line: req.body.line,
-        hourlyCost : req.body.hourlyCost,
+        dailyCost : req.body.dailyCost,
+        totalCost: req.body.diffDays * req.body.dailyCost
     })
     try{
         await reservation.save()
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const reservations = await Reservations.find().exec()
+    const reservations = await Reservations.find().sort('-created_at').exec()
     res.send(reservations)
 })
 
