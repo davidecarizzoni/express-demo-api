@@ -1,9 +1,9 @@
 const express = require('express')
-const Reservations = require('./src/models/Reservation')
+const Reservations = require('../models/Reservation')
 const router = express.Router()
 
 //RESERVATIONS
-router.post('/reservations', async (req, res) => {
+router.post('/', async (req, res) => {
     const reservation = new Reservations({
         title: req.body.title,
         startDate: req.body.startDate,
@@ -13,16 +13,18 @@ router.post('/reservations', async (req, res) => {
     })
     await reservation.save()
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Header', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.send(reservation)
 })
 
-router.get('/reservations', async (req, res) => {
+router.get('/', async (req, res) => {
     const reservations = await Reservations.find().exec()
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(reservations)
 })
 
-router.get('/reservations/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const reservation = await Reservations.findById( req.params.id )
@@ -33,7 +35,7 @@ router.get('/reservations/:id', async (req, res) => {
     }
 })
 
-router.put("/reservations/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const reservation = await Reservations.findOne({ _id: req.params.id })
@@ -47,7 +49,7 @@ router.put("/reservations/:id", async (req, res) => {
         res.send({ error: "Post doesn't exist!" })
     }
 })
-router.delete('/reservations/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         await Reservations.deleteOne({ _id: req.params.id })
