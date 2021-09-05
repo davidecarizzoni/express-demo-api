@@ -10,8 +10,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 //ROUTER
-const reservationRoutes = require('./src/routes/reservations')
-const postsRoutes = require('./src/routes/posts')
+const reservationRoutes = require('./src/api/reservations/controller')
+const postsRoutes = require('./src/api/posts/controller')
 
 //MIDDLEWARE
 app.use('/reservations', reservationRoutes)
