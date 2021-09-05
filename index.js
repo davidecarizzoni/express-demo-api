@@ -17,7 +17,7 @@ const postsRoutes = require('./src/routes/posts')
 app.use('/reservations', reservationRoutes)
 app.use('/posts', postsRoutes)
 
-// Connect to MongoDB database
+// Connect to MongoDB database //INSERT IN HEROKU VARS
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connect') )
 
 app.use(express.json())
