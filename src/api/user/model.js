@@ -34,7 +34,7 @@ const schema = new Schema({
 )
 
 
-schema.methods.generateAuthToken = function () {
+schema.methods.generateAuthToken =  () => {
     const token = jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY);
     return token;
 };
