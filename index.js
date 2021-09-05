@@ -12,10 +12,12 @@ app.use(cors())
 //ROUTER
 const reservationRoutes = require('./src/api/reservations/controller')
 const postsRoutes = require('./src/api/posts/controller')
+const auth = require('./src/api/user/controller')
 
 //MIDDLEWARE
 app.use('/reservations', reservationRoutes)
 app.use('/posts', postsRoutes)
+app.use('/auth', auth)
 
 // Connect to MongoDB database //INSERT IN HEROKU VARS
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connect') )
