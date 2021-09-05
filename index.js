@@ -18,7 +18,7 @@ app.use('/reservations', reservationRoutes)
 app.use('/posts', postsRoutes)
 
 // Connect to MongoDB database
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connect') )
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connect') )
 
 app.use(express.json())
 
