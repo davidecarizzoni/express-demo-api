@@ -4,9 +4,16 @@ const router = express.Router()
 
 //RESERVATIONS
 router.post('/', async (req, res) => {
+
+    let totalCost = 0
+    req.body.menus.forEach((m) => {
+        totalCost += m.totalCost
+    })
+
     const burgerReservation = new BurgerReservation({
         title: req.body.title,
-        menus: req.body.menus
+        menus: req.body.menus,
+        totalCost: totalCost
     })
     try{
         await burgerReservation.save()

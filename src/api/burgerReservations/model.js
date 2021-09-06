@@ -9,8 +9,13 @@ const schema = new Schema({
         },
         menus: {
             type: Array,
-            default: []
+            default: [],
+            required: true
         },
+        totalCost: {
+            type: Number,
+            default: 0
+        }
     },
     {
         timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}
