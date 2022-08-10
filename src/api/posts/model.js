@@ -10,6 +10,9 @@ const schema = new Schema({
             type: String,
             required: true,
         },
+        subtitle: {
+            type: String,
+        }
     },
     {
         timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}
